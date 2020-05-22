@@ -1,0 +1,11 @@
+.current-temp {
+    margin-top: 10vh;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    color: #000066;
+}
+
+.city-text {
+    font-size: 0.8em;
+}
