@@ -1,0 +1,32 @@
+.step-container {
+    display: flex;
+    padding: 2%;
+    font-weight: bold;
+    font-size: 1em;
+    color: #000666;
+}
+
+td {
+    min-width: inherit;
+}
+
+.right-table {
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.icon-box {
+    font-size: 1.5em;
+}
+
+.day-box {
+    min-width: 80px;
+}
+
+.high-temp, .day-box {
+    padding-left: 10%;
+}
+
+.rain {
+    padding-right: 10%;
+}
