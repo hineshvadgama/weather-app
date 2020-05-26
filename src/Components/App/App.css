@@ -13,3 +13,11 @@
 .forecast-step-spacer {
     margin-top: 1vh;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: 10% auto 20% auto 20%;
+    justify-content: space-between;
+    font-size: 1em;
+    padding: 0 5%;
+}

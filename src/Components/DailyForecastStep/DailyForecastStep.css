@@ -1,55 +1,31 @@
-.step-container {
-    display: flex;
-    padding: 5%;
+.step-grid-item {
     font-weight: bold;
-    font-size: 1em;
-    color: #000666;
 }
 
-td {
-    min-width: inherit;
+#icon-box, #high-temp, #low-temp, #rain-data, #humidity-data {
+    margin-bottom: 4vh;
 }
 
-.right-table {
-    margin-left: auto;
-    margin-right: 0px;
+#empty-header, #day-box ,#rain-header, #humidity-header {
+    margin-bottom: 2vh;
 }
 
-.icon-box {
+#icon-box {
+    text-align: center;
+    color: grey;
+    font-size: 1.6em;
+}
+
+#high-temp {
+    color: #000066;
     font-size: 1.5em;
+}
+
+#low-temp {
     color: grey;
 }
 
-.day-box {
-    min-width: 65px;
-    padding-bottom: 1vh;
-    font-size: 1em;
-    color: #000;
-}
-
-.high-temp, .day-box {
-    padding-left: 15%;
-}
-
-.high-temp {
-    font-size: 1.2em;
-}
-
-.low-temp {
+#rain-header, #humidity-header {
+    font-size: 0.9em;
     color: grey;
-}
-
-.right-header {
-    padding-bottom: 1vh;
-    font-size: 0.8em;
-    line-height: 2em;
-    color: grey;
-}
-
-.rain {
-    padding-right: 30%;
-}
-
-.right-data {
-    color: #000;
 }

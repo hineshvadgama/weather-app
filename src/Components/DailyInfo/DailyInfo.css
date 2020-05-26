@@ -1,0 +1,23 @@
+.di-grid-contanier {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-evenly;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.di-grid-item {
+    text-align: center;
+    margin: 2vh 0 2vh 0;
+    font-size: 1em;
+}
+
+.di-content-parent {
+    text-align: left;
+    color: grey;
+}
+
+.di-content {
+    font-size: 2em;
+    color: #000;
+}

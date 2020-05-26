@@ -1,34 +1,44 @@
 import React from 'react';
 import './DailyForecastStep.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudSun } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faCloudSun, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
 function DailyForecastStep(props) {
 
+    function getIconFromStatus(status) {
+
+        switch (status) {
+
+            case 'sun':
+                return (<FontAwesomeIcon icon={faSun} />);
+            
+            case 'cloud/sun':
+                return (<FontAwesomeIcon icon={faCloudSun} />);
+                
+            case 'heavy-rain':
+                return (<FontAwesomeIcon icon={faCloudShowersHeavy} />);
+
+            default:
+                return (<FontAwesomeIcon icon={faCloudSun} />)
+        }
+    }
+
     return (
-        <div class='step-container'>
-            <table class='left-table'>
-                <tr>
-                    <td></td>
-                    <td class='day-box'>{props.day}</td>
-                </tr>
-                <tr>
-                    <td class='icon-box'><FontAwesomeIcon icon={faCloudSun} /></td>
-                    <td class='high-temp'>24°C</td>
-                    <td class='low-temp'>21°C</td>
-                </tr>
-            </table>
-            <table class='right-table'>
-                <tr>
-                    <td class='rain right-header'>Rain</td>
-                    <td class='right-header'>Humidity</td>
-                </tr>
-                <tr>
-                    <td class='rain right-data'>0%</td>
-                    <td class='right-data'>75%</td>
-                </tr>
-            </table>
-        </div>
+
+        <>
+            <div className='step-grid-item' id='empty-header' />
+            <div className='step-grid-item' id='day-box'>{props.day}</div>
+            <div className='step-grid-item' id='empty-header' />
+            <div className='step-grid-item' id='rain-header'>Rain</div>
+            <div className='step-grid-item' id='humidity-header'>Humidity</div>
+
+            <div className='step-grid-item' id='icon-box'>{getIconFromStatus(props.status)}</div>
+            <div className='step-grid-item' id='high-temp'>{props.high}</div>
+            <div className='step-grid-item' id='low-temp'>{props.low}</div>
+            <div className='step-grid-item' id='rain-data'>{props.rain}</div>
+            <div className='step-grid-item' id='humidity-data'>{props.humidity}</div>
+        </>
+
     )
 
 }
