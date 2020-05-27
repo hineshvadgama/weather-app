@@ -1,3 +1,9 @@
+.viewing-day {
+    font-size: 1em;
+    margin-bottom: 1vh;
+    margin-left: 1vw;
+}
+
 .di-grid-contanier {
     display: grid;
     grid-template-columns: auto auto;
@@ -9,15 +15,27 @@
 .di-grid-item {
     text-align: center;
     margin: 2vh 0 2vh 0;
-    font-size: 1em;
 }
 
 .di-content-parent {
     text-align: left;
     color: grey;
+    font-size: 0.8em;
 }
 
 .di-content {
     font-size: 2em;
     color: #000;
 }
+
+.hi-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    margin-top: 5vh;
+}
+
+.hi-container::-webkit-scrollbar {
+    display: none;
+  }
