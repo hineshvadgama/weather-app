@@ -1,4 +1,11 @@
-<div className='grid'>
+import React from 'react';
+import DailyForecastStep from '../Components/DailyForecastStep/DailyForecastStep.js';
+import './FiveDayForecast.css';
+
+function FiveDayForecast() {
+
+    return (
+        <div className='grid'>
 
           <DailyForecastStep
             day='Today'
@@ -46,3 +53,8 @@
           />
 
         </div>
+    )
+
+}
+
+export default FiveDayForecast;

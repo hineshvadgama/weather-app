@@ -2,6 +2,7 @@ import React from 'react';
 import './DailyForecastStep.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloudSun, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 function DailyForecastStep(props) {
 
@@ -27,7 +28,9 @@ function DailyForecastStep(props) {
 
         <>
             <div className='step-grid-item' id='empty-header' />
-            <div className='step-grid-item' id='day-box'>{props.day}</div>
+            <div className='step-grid-item' id='day-box'>
+                <Link to={`/${props.day}`}>{props.day}</Link>
+            </div>
             <div className='step-grid-item' id='empty-header' />
             <div className='step-grid-item' id='rain-header'>Rain</div>
             <div className='step-grid-item' id='humidity-header'>Humidity</div>

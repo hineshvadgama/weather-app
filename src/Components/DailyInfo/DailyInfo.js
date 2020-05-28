@@ -3,14 +3,14 @@ import './DailyInfo.css';
 import '../HourlyInfo/HourlyInfo.js';
 import HourlyInfo from '../HourlyInfo/HourlyInfo.js';
 
-function DailyInfo() {
+function DailyInfo(props) {
 
     return (
 
         <>
 
             <div className='viewing-day'>
-                Today
+                {props.day}
             </div>
 
             <div className='di-grid-contanier'>
