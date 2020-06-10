@@ -7,7 +7,7 @@ function CurrentTemp(props) {
 
     return (
         <div className='current-temp'>
-            <span className='city-text'>London</span>
+            <span className='city-text'>{props.area}</span>
             <br />
             {props.temp} <FontAwesomeIcon icon={faCloudSun} />
         </div>
