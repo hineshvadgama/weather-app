@@ -1,36 +1,49 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import CurrentTemp from '../CurrentTemp/CurrentTemp.js';
+import FiveDayForecast from '../../Routes/FiveDayForecast/FiveDayForecast.js';
+import HourlyForecast from '../../Routes//HourlyForecast/HourlyForecast.js';
+
+import { getApiKey } from '../../Utils/getApiKey.js';
+
 import './App.css';
 import '../CurrentTemp/CurrentTemp.js';
-import CurrentTemp from '../CurrentTemp/CurrentTemp.js';
-import FiveDayForecast from '../../Routes/FiveDayForecast.js';
-import HourlyForecast from '../../Routes/HourlyForecast.js';
-import { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
 
+  let [coordinateData, setCoordinateData] = useState({latitude: 'notSet', longitude: 'notSet'});
   let [weatherData, setWeatherData] = useState({name: 'Loading...', main: {temp: 'Loading...'}});
-  const API_KEY = '3478d317fdb0e5afa323177a3bfeaa15';
+  let [isDataFetched, setIsDataFetched] = useState(false);
 
   useEffect(() => {
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+      navigator.geolocation.getCurrentPosition(locationSuccess, locationFailure);
     }
-  
-    function locationSuccess(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
 
-      fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
-      .then (res => res.json())
-      .then (data => setWeatherData(data));
+    function locationSuccess(position) {
+      setCoordinateData({latitude: position.coords.latitude, longitude: position.coords.longitude});
     }
-  
-    function locationError() {
-      alert('There was an error retrieving your location.');
+    
+    function locationFailure() {
+      alert('There was an error retrieving your location');
     }
 
   }, []);
+
+  if (coordinateData.latitude !== 'notSet') {
+    if (isDataFetched === false) {
+
+      const apiKey = getApiKey();
+
+      fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${coordinateData.latitude}&lon=${coordinateData.longitude}&appid=${apiKey}&units=metric`)
+      .then (res => res.json())
+      .then (data => setWeatherData(data));
+
+      setIsDataFetched(true);
+    }
+  }
   
   function roundTemp() {
     const temp = (!isNaN(weatherData.main.temp)) ? `${Math.round(weatherData.main.temp)}°C` : 'Loading...';
@@ -40,7 +53,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-
         <div className='app-title'>
           Weather App
         </div>
@@ -51,7 +63,7 @@ function App() {
           />
         <div className='current-temp-forecast-spacer' />
 
-        <Route path="/" exact component={FiveDayForecast} />
+        <Route path="/" exact render={(props) => <FiveDayForecast {...props} coordinates={{latitude: coordinateData.latitude, longitude: coordinateData.longitude}} />} />
         <Route path='/:day' component={HourlyForecast} />
 
       </BrowserRouter>

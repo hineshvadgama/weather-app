@@ -1,47 +1,74 @@
 import React from 'react';
 import './DailyForecastStep.css';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faCloudSun, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { faCloud, faSun, faCloudSunRain, faCloudSun, faCloudShowersHeavy, faCloudRain, faSnowflake } from '@fortawesome/free-solid-svg-icons';
 
 function DailyForecastStep(props) {
 
-    function getIconFromStatus(status) {
+    const history = useHistory();
 
-        switch (status) {
+    function handleClick() {
+        history.push(`/${props.day}`);
+    }
 
-            case 'sun':
-                return (<FontAwesomeIcon icon={faSun} />);
+    function convertStatusToIcon() {
+
+        let iconName = <FontAwesomeIcon icon={faCloud} />
+        
+        switch (props.status) {
+            case 'Thunderstorm':
+                iconName = <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                break;
             
-            case 'cloud/sun':
-                return (<FontAwesomeIcon icon={faCloudSun} />);
-                
-            case 'heavy-rain':
-                return (<FontAwesomeIcon icon={faCloudShowersHeavy} />);
+            case 'Drizzle':
+                iconName = <FontAwesomeIcon icon={faCloudRain} />
+                break;
+
+            case 'Rain':
+                iconName = <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                break;
+
+            case 'Snow':
+                iconName = <FontAwesomeIcon icon={faSnowflake} />
+                break;
+
+            case 'Clear':
+                iconName = <FontAwesomeIcon icon={faSun} />
+                break;
+
+            case 'Clouds':
+                iconName = <FontAwesomeIcon icon={faCloud} />
+                break;
 
             default:
-                return (<FontAwesomeIcon icon={faCloudSun} />)
+                iconName = <FontAwesomeIcon icon={faCloud} />
         }
+
+        return iconName;
     }
 
     return (
-
         <>
-            <div className='step-grid-item' id='empty-header' />
-            <div className='step-grid-item' id='day-box'>
-                <Link to={`/${props.day}`}>{props.day}</Link>
-            </div>
-            <div className='step-grid-item' id='empty-header' />
-            <div className='step-grid-item' id='rain-header'>Rain</div>
-            <div className='step-grid-item' id='humidity-header'>Humidity</div>
-
-            <div className='step-grid-item' id='icon-box'>{getIconFromStatus(props.status)}</div>
-            <div className='step-grid-item' id='high-temp'>{props.high}</div>
-            <div className='step-grid-item' id='low-temp'>{props.low}</div>
-            <div className='step-grid-item' id='rain-data'>{props.rain}</div>
-            <div className='step-grid-item' id='humidity-data'>{props.humidity}</div>
+            <tbody onClick={handleClick}>
+                <tr>
+                    <td></td>
+                    <td>{props.day}</td>
+                    <td></td>
+                    <td>Wind</td>
+                    <td>Humidity</td>
+                </tr>
+            </tbody>
+            <tbody onClick={handleClick}>
+                <tr>
+                    <td>{convertStatusToIcon()}</td>
+                    <td>{props.high}</td>
+                    <td>{props.low}</td>
+                    <td>{props.wind}</td>
+                    <td>{props.humidity}</td>
+                </tr>
+            </tbody>
         </>
-
     )
 
 }
