@@ -1,0 +1,44 @@
+.grey {
+    color: grey;
+}
+
+tbody {
+    font-weight: bold;
+}
+
+.header-row td {
+    padding-bottom: 1vh;
+}
+
+.data-row td {
+    padding-bottom: 5vh;
+}
+
+#high-temp {
+    font-size: 1.2em;
+    color: #000066;
+}
+
+#icon {
+    width: 10vw;
+    padding-left: 2vw;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+#day, #high-temp {
+    padding-left: 5vw;
+}
+
+#wind-header, #wind {
+    padding-left: 8vw;
+}
+
+#wind-header, #humidity-header {
+    font-size: 0.8em;
+}
+
+#humidity-header, #humidity {
+    padding-left: 5vw;
+    padding-right: 2vw;
+}

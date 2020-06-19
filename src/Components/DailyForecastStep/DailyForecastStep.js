@@ -2,7 +2,7 @@ import React from 'react';
 import './DailyForecastStep.css';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloud, faSun, faCloudSunRain, faCloudSun, faCloudShowersHeavy, faCloudRain, faSnowflake } from '@fortawesome/free-solid-svg-icons';
+import { faCloud, faSun, faCloudShowersHeavy, faCloudRain, faSnowflake } from '@fortawesome/free-solid-svg-icons';
 
 function DailyForecastStep(props) {
 
@@ -51,21 +51,21 @@ function DailyForecastStep(props) {
     return (
         <>
             <tbody onClick={handleClick}>
-                <tr>
+                <tr className='header-row'>
                     <td></td>
-                    <td>{props.day}</td>
+                    <td id='day'>{props.day}</td>
                     <td></td>
-                    <td>Wind</td>
-                    <td>Humidity</td>
+                    <td className='grey' id='wind-header'>Wind</td>
+                    <td className='grey' id='humidity-header'>Humidity</td>
                 </tr>
             </tbody>
             <tbody onClick={handleClick}>
-                <tr>
-                    <td>{convertStatusToIcon()}</td>
-                    <td>{props.high}</td>
-                    <td>{props.low}</td>
-                    <td>{props.wind}</td>
-                    <td>{props.humidity}</td>
+                <tr className='data-row'>
+                    <td className='grey' id='icon'>{convertStatusToIcon()}</td>
+                    <td id='high-temp'>{props.high}</td>
+                    <td id='low-temp'>{props.low}</td>
+                    <td id='wind'>{props.wind}</td>
+                    <td id='humidity'>{props.humidity}</td>
                 </tr>
             </tbody>
         </>

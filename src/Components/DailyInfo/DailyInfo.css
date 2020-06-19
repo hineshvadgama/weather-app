@@ -27,15 +27,3 @@
     font-size: 2em;
     color: #000;
 }
-
-.hi-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    margin-top: 5vh;
-}
-
-.hi-container::-webkit-scrollbar {
-    display: none;
-  }

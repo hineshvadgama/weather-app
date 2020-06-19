@@ -1,7 +1,5 @@
 import React from 'react';
 import './DailyInfo.css';
-import '../HourlyInfo/HourlyInfo.js';
-import HourlyInfo from '../HourlyInfo/HourlyInfo.js';
 
 function DailyInfo(props) {
 
@@ -46,108 +44,6 @@ function DailyInfo(props) {
                         <span className='di-content'>74%</span>
                     </div>
                 </div>
-
-            </div>
-
-            <div className='hi-container'>
-
-                <HourlyInfo
-                    time='00:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='01:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='02:00'
-                    temp='21°C'
-                    now={true}
-                />
-                <HourlyInfo
-                    time='03:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='04:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='05:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='06:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='07:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='08:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='09:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='10:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='11:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='12:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='13:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='14:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='15:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='16:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='17:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='18:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='19:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='20:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='21:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='22:00'
-                    temp='21°C'
-                />
-                <HourlyInfo
-                    time='23:00'
-                    temp='21°C'
-                />
 
             </div>
 

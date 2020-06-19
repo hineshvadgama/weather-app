@@ -6,7 +6,6 @@ import FiveDayForecast from '../../Routes/FiveDayForecast/FiveDayForecast.js';
 import HourlyForecast from '../../Routes//HourlyForecast/HourlyForecast.js';
 
 import { getApiKey } from '../../Utils/getApiKey.js';
-
 import './App.css';
 import '../CurrentTemp/CurrentTemp.js';
 
@@ -53,10 +52,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div className='app-title'>
-          Weather App
-        </div>
-
+      
         <CurrentTemp
           temp={roundTemp()}
           area={weatherData.name}
@@ -64,7 +60,7 @@ function App() {
         <div className='current-temp-forecast-spacer' />
 
         <Route path="/" exact render={(props) => <FiveDayForecast {...props} coordinates={{latitude: coordinateData.latitude, longitude: coordinateData.longitude}} />} />
-        <Route path='/:day' component={HourlyForecast} />
+        <Route path='/:day' render={() => <HourlyForecast coordinates={{latitude: coordinateData.latitude, longitude: coordinateData.longitude}} />} />
 
       </BrowserRouter>
     </>
