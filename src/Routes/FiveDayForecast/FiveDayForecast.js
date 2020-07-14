@@ -3,7 +3,7 @@ import DailyForecastStep from '../../Components/DailyForecastStep/DailyForecastS
 import './FiveDayForecast.css';
 import { loadingData } from './sampleData.js';
 
-import { getApiKey } from '../../Utils/getApiKey.js';
+import { getApiKey } from '../../Utils/utils.js';
 
 const FiveDayForecast = (props) => {
 

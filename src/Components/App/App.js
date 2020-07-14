@@ -5,7 +5,7 @@ import CurrentTemp from '../CurrentTemp/CurrentTemp.js';
 import FiveDayForecast from '../../Routes/FiveDayForecast/FiveDayForecast.js';
 import HourlyForecast from '../../Routes//HourlyForecast/HourlyForecast.js';
 
-import { getApiKey } from '../../Utils/getApiKey.js';
+import { getApiKey } from '../../Utils/utils.js';
 import './App.css';
 import '../CurrentTemp/CurrentTemp.js';
 
@@ -52,7 +52,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      
         <CurrentTemp
           temp={roundTemp()}
           area={weatherData.name}
