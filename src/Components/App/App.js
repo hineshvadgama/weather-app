@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import CurrentTemp from '../CurrentTemp/CurrentTemp.js';
+import BackButton from '../BackButton/BackButton.js';
 import FiveDayForecast from '../../Routes/FiveDayForecast/FiveDayForecast.js';
 import HourlyForecast from '../../Routes//HourlyForecast/HourlyForecast.js';
 
@@ -14,6 +15,8 @@ function App() {
   let [coordinateData, setCoordinateData] = useState({latitude: 'notSet', longitude: 'notSet'});
   let [weatherData, setWeatherData] = useState({name: 'Loading...', main: {temp: 'Loading...'}});
   let [isDataFetched, setIsDataFetched] = useState(false);
+  
+  const backButton = <BackButton />
 
   useEffect(() => {
 
@@ -52,6 +55,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
+
+      {backButton}
+
         <CurrentTemp
           temp={roundTemp()}
           area={weatherData.name}

@@ -28,7 +28,7 @@ function HourlyForecast(props) {
             }
 
         }
-
+        // eslint-disable-next-line
     }, [props]);
 
     function getDateFromObject(dateObject) {
@@ -74,7 +74,6 @@ function HourlyForecast(props) {
 
             if (hourlyData.isDataSet === false) {
                 setHourlyData({renderedData: newHourlyData, isDataSet: true});
-                console.log(newHourlyData);
             }
         }
 
