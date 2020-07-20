@@ -108,6 +108,7 @@ function HourlyForecast(props) {
                         key={i}
                         time={extractTimeFromDateTime(hourlyData.renderedData[i].dt_txt)}
                         temp={`${Math.round(hourlyData.renderedData[i].main.temp)}°C`}
+                        status={hourlyData.renderedData[i].weather[0].main}
                     />
                 );
 
