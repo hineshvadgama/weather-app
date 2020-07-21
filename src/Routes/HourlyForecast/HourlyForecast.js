@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import DailyInfo from '../../Components/DailyInfo/DailyInfo.js';
 import HourlyInfo from '../../Components/HourlyInfo/HourlyInfo.js';
+import NoHourlyDataMessage from '../../Components/NoHourlyDataMessage/NoHouryDataMessage.js';
 import './HourlyForecast.css';
 import { getApiKey } from '../../Utils/utils.js';
 
@@ -46,35 +47,32 @@ function HourlyForecast(props) {
 
     function setHourlyDataToSelectedDate() {
 
-        if (typeof(hourlyData.renderedData[0].dt_txt) === 'string') {
+        let newHourlyData = [];
+        let usersSelectedDay;
 
-            let newHourlyData = [];
-            let usersSelectedDay;
+        if (dayOfWeekInUrl === 'Today') {
 
-            if (dayOfWeekInUrl === 'Today') {
+            usersSelectedDay = getDateFromObject(todaysDateObject);
+        } else {
 
-                usersSelectedDay = getDateFromObject(todaysDateObject);
-            } else {
+            const numberOfDaysBetweenTodayAndSelectedDay = getSelectedNumberOfDaysAheadOfToday(todaysDateObject.getDay(), dayOfWeekInUrl);
+            let selectedDateObject = new Date();
+            selectedDateObject.setDate(todaysDateObject.getDate() + numberOfDaysBetweenTodayAndSelectedDay);
+            usersSelectedDay = getDateFromObject(selectedDateObject);
+        }
 
-                const numberOfDaysBetweenTodayAndSelectedDay = getSelectedNumberOfDaysAheadOfToday(todaysDateObject.getDay(), dayOfWeekInUrl);
-                let selectedDateObject = new Date();
-                selectedDateObject.setDate(todaysDateObject.getDate() + numberOfDaysBetweenTodayAndSelectedDay);
-                usersSelectedDay = getDateFromObject(selectedDateObject);
+        for (let i = 0; i < hourlyData.renderedData.length; i++) {
+
+            const date = hourlyData.renderedData[i].dt_txt.slice(-19, -9);
+
+            if (usersSelectedDay === date) {
+                newHourlyData.push(hourlyData.renderedData[i]);
             }
 
-            for (let i = 0; i < hourlyData.renderedData.length; i++) {
+        }
 
-                const date = hourlyData.renderedData[i].dt_txt.slice(-19, -9);
-    
-                if (usersSelectedDay === date) {
-                    newHourlyData.push(hourlyData.renderedData[i]);
-                }
-    
-            }
-
-            if (hourlyData.isDataSet === false) {
-                setHourlyData({renderedData: newHourlyData, isDataSet: true});
-            }
+        if (hourlyData.isDataSet === false) {
+            setHourlyData({renderedData: newHourlyData, isDataSet: true});
         }
 
     }
@@ -95,23 +93,31 @@ function HourlyForecast(props) {
 
     function getHourlyComponents() {
 
-        setHourlyDataToSelectedDate();
-
         let arrayOfHourlyInfoComponents = [];
 
-        if (hourlyData.isDataSet === true) {
+        if (typeof(hourlyData.renderedData[0]) === 'undefined') {
 
-            for (let i = 0; i < hourlyData.renderedData.length; i++) {
+            arrayOfHourlyInfoComponents = <NoHourlyDataMessage />
 
-                arrayOfHourlyInfoComponents.push(
-                    <HourlyInfo
-                        key={i}
-                        time={extractTimeFromDateTime(hourlyData.renderedData[i].dt_txt)}
-                        temp={`${Math.round(hourlyData.renderedData[i].main.temp)}°C`}
-                        status={hourlyData.renderedData[i].weather[0].main}
-                    />
-                );
+        } else if (typeof(hourlyData.renderedData[0].dt_txt) === 'string') {
 
+            setHourlyDataToSelectedDate();
+
+            if (hourlyData.isDataSet === true) {
+
+                for (let i = 0; i < hourlyData.renderedData.length; i++) {
+    
+                    arrayOfHourlyInfoComponents.push(
+                        <HourlyInfo
+                            key={i}
+                            time={extractTimeFromDateTime(hourlyData.renderedData[i].dt_txt)}
+                            temp={`${Math.round(hourlyData.renderedData[i].main.temp)}°C`}
+                            status={hourlyData.renderedData[i].weather[0].main}
+                        />
+                    );
+    
+                }
+    
             }
 
         }
@@ -130,7 +136,7 @@ function HourlyForecast(props) {
         <>
             <DailyInfo day={dayOfWeekInUrl} />
 
-            <div className='hi-container'>
+            <div className={`hi-container ${typeof(hourlyData.renderedData[0]) === 'undefined' ? 'justify-center' : ''}`}>
 
                 {getHourlyComponents()}
 

@@ -9,3 +9,7 @@
 .hi-container::-webkit-scrollbar {
     display: none;
 }
+
+.justify-center {
+    justify-content: center;
+}
