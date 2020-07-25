@@ -24,7 +24,7 @@ tbody {
 
 #high-temp {
     font-size: 1.2em;
-    color: #000066;
+    color: #474747;
 }
 
 #icon {
@@ -49,4 +49,8 @@ tbody {
 #humidity-header, #humidity {
     padding-left: 5vw;
     padding-right: 2vw;
+}
+
+#day {
+    font-weight: bold;
 }

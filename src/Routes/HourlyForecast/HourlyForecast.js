@@ -66,7 +66,7 @@ function HourlyForecast(props) {
 
     function getSelectedNumberOfDaysAheadOfToday(todaysDay, selectedDayOfWeek) {
         
-        const twoWeeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const twoWeeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         let twoWeekCounter = 0;
 
