@@ -125,7 +125,7 @@ function DailyInfo(props) {
                     </div>
                 </div>
 
-                <div className='di-grid-item' id='humidity'>
+                <div className='di-grid-item'>
                     <div className='di-content-parent'>
                         Humidity
                         <br />
