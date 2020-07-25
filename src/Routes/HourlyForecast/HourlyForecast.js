@@ -4,7 +4,7 @@ import DailyInfo from '../../Components/DailyInfo/DailyInfo.js';
 import HourlyInfo from '../../Components/HourlyInfo/HourlyInfo.js';
 import NoHourlyDataMessage from '../../Components/NoHourlyDataMessage/NoHouryDataMessage.js';
 import './HourlyForecast.css';
-import { getApiKey } from '../../Utils/utils.js';
+import { getApiKey, getDateFromObject } from '../../Utils/utils.js';
 
 function HourlyForecast(props) {
 
@@ -31,19 +31,6 @@ function HourlyForecast(props) {
         }
         // eslint-disable-next-line
     }, [props]);
-
-    function getDateFromObject(dateObject) {
-        let day;
-        let month;
-
-        // Put 0 at the start of single digit date and month to match API format
-        day = (dateObject.getDate() < 10) ? `0${dateObject.getDate()}` : dateObject.getDate();
-        month = (dateObject.getMonth() < 10) ? `0${dateObject.getMonth()+1}` : dateObject.getMonth();
-
-        const correctFormatDate = `${dateObject.getFullYear()}-${month}-${day}`;
-
-        return correctFormatDate;
-    }
 
     function setHourlyDataToSelectedDate() {
 
@@ -132,9 +119,31 @@ function HourlyForecast(props) {
         return time;
     }
 
+    function getUserDay() {
+
+        let dayInQuestion;
+        if (dayOfWeekInUrl === 'Today') {
+
+            dayInQuestion = getDateFromObject(todaysDateObject);
+        } else {
+
+            const numberOfDaysBetweenTodayAndSelectedDay = getSelectedNumberOfDaysAheadOfToday(todaysDateObject.getDay(), dayOfWeekInUrl);
+            let selectedDateObject = new Date();
+            selectedDateObject.setDate(todaysDateObject.getDate() + numberOfDaysBetweenTodayAndSelectedDay);
+            dayInQuestion = getDateFromObject(selectedDateObject);
+        }
+
+        return dayInQuestion;
+    }
+
     return (
         <>
-            <DailyInfo day={dayOfWeekInUrl} />
+            <DailyInfo
+                day={dayOfWeekInUrl}
+                latitude={props.coordinates.latitude}
+                longitude={props.coordinates.longitude}
+                userDay={getUserDay()}
+            />
 
             <div className={`hi-container ${typeof(hourlyData.renderedData[0]) === 'undefined' ? 'justify-center' : ''}`}>
 
