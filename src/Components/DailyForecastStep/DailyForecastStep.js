@@ -61,11 +61,11 @@ function DailyForecastStep(props) {
             </tbody>
             <tbody onClick={handleClick}>
                 <tr className='data-row'>
-                    <td className='grey' id='icon'>{convertStatusToIcon()}</td>
-                    <td id='high-temp'>{props.high}</td>
-                    <td id='low-temp'>{props.low}</td>
-                    <td id='wind'>{props.wind}</td>
-                    <td id='humidity'>{props.humidity}</td>
+                    <td className='grey table-data' id='icon'>{convertStatusToIcon()}</td>
+                    <td className='table-data' id='high-temp'>{props.high}</td>
+                    <td className='table-data' id='low-temp'>{props.low}</td>
+                    <td className='table-data' id='wind'>{props.wind}</td>
+                    <td className='table-data' id='humidity'>{props.humidity}</td>
                 </tr>
             </tbody>
         </>

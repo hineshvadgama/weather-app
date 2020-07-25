@@ -45,25 +45,25 @@ const FiveDayForecast = (props) => {
 
       switch (dayNumber) {
         case 0:
-          dayOfTheWeek = 'Sunday'
+          dayOfTheWeek = 'Sun'
           break;
         case 1:
-          dayOfTheWeek = 'Monday'
+          dayOfTheWeek = 'Mon'
           break;
         case 2:
-          dayOfTheWeek = 'Tuesday'
+          dayOfTheWeek = 'Tue'
           break;
         case 3:
-          dayOfTheWeek = 'Wednesday'
+          dayOfTheWeek = 'Wed'
           break;
         case 4:
-          dayOfTheWeek = 'Thursday'
+          dayOfTheWeek = 'Thu'
           break;
         case 5:
-          dayOfTheWeek = 'Friday'
+          dayOfTheWeek = 'Fri'
           break;
         case 6:
-          dayOfTheWeek = 'Saturday'
+          dayOfTheWeek = 'Sat'
           break;
         default:
           dayOfTheWeek = 'Loading...'

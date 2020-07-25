@@ -1,3 +1,9 @@
+.app-container {
+    height: 100vh;
+    background-color: #D5F8FF; /* For browsers that do not support gradients */
+    background-image: linear-gradient(#D5F8FF, #FFF); /* Standard syntax (must be last) */
+}
+
 .current-temp-forecast-spacer {
     padding-bottom: 10vh;
 }

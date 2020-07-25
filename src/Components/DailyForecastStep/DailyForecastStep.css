@@ -2,6 +2,10 @@
     color: grey;
 }
 
+table {
+    border-spacing: 0px;
+}
+
 tbody {
     font-weight: bold;
 }
@@ -11,7 +15,11 @@ tbody {
 }
 
 .data-row td {
-    padding-bottom: 5vh;
+    padding-bottom: 0vh;
+}
+
+.table-data {
+    border-bottom: 1px solid #EBEBEB;
 }
 
 #high-temp {

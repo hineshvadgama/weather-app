@@ -53,7 +53,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className='app-container'>
       <BrowserRouter>
 
       {backButton}
@@ -68,7 +68,7 @@ function App() {
         <Route path='/:day' render={() => <HourlyForecast coordinates={{latitude: coordinateData.latitude, longitude: coordinateData.longitude}} />} />
 
       </BrowserRouter>
-    </>
+    </div>
   )
     
 }
