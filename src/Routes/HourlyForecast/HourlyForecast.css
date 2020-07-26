@@ -3,7 +3,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: scroll;
-    margin-top: 5vh;
+    margin-top: 5vw;
 }
 
 .hi-container::-webkit-scrollbar {

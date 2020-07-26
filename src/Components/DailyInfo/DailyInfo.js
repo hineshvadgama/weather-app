@@ -102,34 +102,26 @@ function DailyInfo(props) {
             <div className='di-grid-contanier'>
 
                 <div className='di-grid-item' id='chance-of-rain'>
-                    <div className='di-content-parent'>
-                        UVI
-                        <br />
-                        <span className='di-content'>{getUVI()}</span>
+                    <div className='di-content di-content-left'>
+                        <span className='di-content-header'>UVI</span>&nbsp;&nbsp;{getUVI()}
                     </div>
                 </div>
 
                 <div className='di-grid-item' id='realfeel'>
-                    <div className='di-content-parent'>
-                        Realfeel
-                        <br />
-                        <span className='di-content'>{getRealFeel()}</span>
+                    <div className='di-content di-content-right'>
+                        <span className='di-content-header'>Realfeel</span>&nbsp;&nbsp;{getRealFeel()}
                     </div>
                 </div>
 
                 <div className='di-grid-item'>
-                    <div className='di-content-parent'>
-                        Wind
-                        <br />
-                        <span className='di-content'>{getWindSpeed()}</span>
+                    <div className='di-content di-content-left'>
+                        <span className='di-content-header'>Wind</span>&nbsp;&nbsp;{getWindSpeed()}
                     </div>
                 </div>
 
                 <div className='di-grid-item'>
-                    <div className='di-content-parent'>
-                        Humidity
-                        <br />
-                        <span className='di-content'>{getHumidity()}</span>
+                    <div className='di-content di-content-right'>
+                        <span className='di-content-header'>Humidity</span>&nbsp;&nbsp;{getHumidity()}
                     </div>
                 </div>
 

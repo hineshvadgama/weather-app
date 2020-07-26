@@ -1,30 +1,33 @@
 .viewing-day {
     font-size: 1em;
-    margin-bottom: 1vh;
-    margin-left: 20vw;
+    margin-left: 5vw;
+    padding-bottom: 2vh;
+    font-weight: bold;
 }
 
 .di-grid-contanier {
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-evenly;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    padding-bottom: 5vw;
+    border-bottom: 1px solid #D9E3E5;
 }
 
-.di-grid-item {
-    text-align: center;
-    margin: 2vh 0 2vh 0;
-}
-
-.di-content-parent {
-    text-align: left;
-    color: grey;
-    font-size: 0.8em;
-    font-weight: bold;
-}
 
 .di-content {
-    font-size: 2em;
-    color: #000;
+    margin-bottom: 2vh;
+    text-align: left;
+}
+
+.di-content-left {
+    float: left;
+}
+
+.di-content-right {
+    float: right;
+}
+
+.di-content-header {
+    font-weight: bold;
 }
