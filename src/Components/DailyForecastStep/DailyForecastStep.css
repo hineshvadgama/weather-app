@@ -1,9 +1,8 @@
-.grey {
-    color: grey;
-}
-
 table {
     border-spacing: 0px;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    color: #474747;
 }
 
 tbody {
@@ -16,21 +15,19 @@ tbody {
 }
 
 .data-row td {
-    padding-bottom: 0vh;
+    padding-bottom: 2vh;
 }
 
 .table-data {
-    border-bottom: 1px solid #EBEBEB;
+    border-bottom: 1px solid #D9E3E5;
 }
 
 #high-temp {
     font-size: 1.2em;
-    color: #474747;
 }
 
 #icon {
     width: 10vw;
-    padding-left: 5vw;
     font-size: 1.4em;
     text-align: center;
 }
@@ -39,17 +36,21 @@ tbody {
     padding-left: 5vw;
 }
 
+#low-temp {
+    padding-left: 5vw;
+}
+
 #wind-header, #wind {
     padding-left: 15vw;
 }
 
 #wind-header, #humidity-header {
+    color: grey;
     font-size: 0.8em;
 }
 
 #humidity-header, #humidity {
     padding-left: 5vw;
-    padding-right: 5vw;
 }
 
 #day {
