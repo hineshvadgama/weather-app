@@ -14,6 +14,12 @@
     border-bottom: 1px solid #D9E3E5;
 }
 
+@media screen and (min-width: 768px) {
+    .di-grid-contanier {
+        max-width: 320px;
+    }
+}
+
 
 .di-content {
     margin-bottom: 2vh;
