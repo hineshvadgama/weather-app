@@ -11,6 +11,7 @@ tbody {
 }
 
 .header-row td {
+    padding-top: 2vh;
     padding-bottom: 1vh;
 }
 
@@ -29,7 +30,7 @@ tbody {
 
 #icon {
     width: 10vw;
-    padding-left: 2vw;
+    padding-left: 5vw;
     font-size: 1.4em;
     text-align: center;
 }
@@ -48,7 +49,7 @@ tbody {
 
 #humidity-header, #humidity {
     padding-left: 5vw;
-    padding-right: 2vw;
+    padding-right: 5vw;
 }
 
 #day {
