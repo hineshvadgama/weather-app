@@ -13,7 +13,15 @@ import '../CurrentTemp/CurrentTemp.js';
 function App() {
 
   let [coordinateData, setCoordinateData] = useState({latitude: 'notSet', longitude: 'notSet'});
-  let [weatherData, setWeatherData] = useState({name: 'Loading...', main: {temp: 'Loading...'}});
+  let [weatherData, setWeatherData] = useState(
+    {
+      name: 'Loading...',
+      main: {
+        temp: 'Loading...'
+      },
+      weather: [{main: 'Loading...'}]
+    }
+  );
   let [isDataFetched, setIsDataFetched] = useState(false);
   
   const backButton = <BackButton />
@@ -61,6 +69,7 @@ function App() {
         <CurrentTemp
           temp={roundTemp()}
           area={weatherData.name}
+          status={weatherData.weather[0].main}
           />
         <div className='current-temp-forecast-spacer' />
 
@@ -70,7 +79,7 @@ function App() {
       </BrowserRouter>
     </div>
   )
-    
+  
 }
 
 export default App;
