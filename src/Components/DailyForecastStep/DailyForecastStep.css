@@ -9,6 +9,10 @@ tbody {
     font-weight: bold;
 }
 
+tbody:hover {
+    cursor: pointer;
+}
+
 .header-row td {
     padding-top: 2vh;
     padding-bottom: 1vh;
