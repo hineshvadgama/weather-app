@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import HomePage from '../../Routes/HomePage/HomePage.js';
 import HourlyForecast from '../../Routes/HourlyForecast/HourlyForecast.js'
 import { CoordinateContext } from '../CoordinateContext.js';
+import './App.css';
 
 function App() {
 
