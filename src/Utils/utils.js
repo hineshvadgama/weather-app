@@ -6,7 +6,6 @@ export function getDateFromObject(dateObject) {
     const month = (dateObject.getMonth() < 10) ? `${dateObject.getMonth()+1}` : dateObject.getMonth();
 
     const correctFormatDate = `${dateObject.getFullYear()}-${month}-${day}`;
-    console.log(dateObject.getMonth());
 
     return correctFormatDate;
 }

@@ -127,7 +127,6 @@ function HourlyForecast() {
 
     return (
         <>
-        {console.log(hourlyData)}
             <CurrentTemp />
             <DailyInfo day={dayOfWeekInUrl} userDay={getUserDay()} />
 
