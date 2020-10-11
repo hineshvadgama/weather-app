@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getApiKey, getDateFromObject } from '../../Utils/utils.js';
 import './DailyInfo.css';
+import { CoordinateContext } from '../CoordinateContext.js';
 
 function DailyInfo(props) {
 
     let [weatherData, setWeatherData] = useState();
     let [isDataFetched, setIsDataFetched] = useState(false);
+    const coordinates = useContext(CoordinateContext);
     let userWeatherData = 'Loading...';
-
-    const apiKey = getApiKey();
 
     useEffect(() => {
 
-        if (typeof(props.latitude) === 'number') {
+        if (coordinates.latitude !== 'notSet') {
 
             if (isDataFetched === false) {
 
-                fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${props.latitude}&lon=${props.longitude}&appid=${apiKey}&units=metric`)
+                const apiKey = getApiKey();
+
+                fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${apiKey}&units=metric`)
                 .then (res => res.json())
                 .then (data => setWeatherData(data));
 
@@ -26,7 +28,7 @@ function DailyInfo(props) {
 
         }
         // eslint-disable-next-line
-    }, [props]);
+    }, [coordinates]);
 
     function convertApiTimestampToDate(apiTimestamp) {
         const apiDate = new Date(apiTimestamp * 1000);

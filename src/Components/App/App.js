@@ -4,6 +4,7 @@ import HomePage from '../../Routes/HomePage/HomePage.js';
 import HourlyForecast from '../../Routes/HourlyForecast/HourlyForecast.js'
 import { CoordinateContext } from '../CoordinateContext.js';
 import './App.css';
+import BackButton from '../BackButton/BackButton.js';
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
       <BrowserRouter>
 
       <CoordinateContext.Provider value={coordinateData}>
+
+        <BackButton />
 
         <Route path="/" exact >
           <HomePage />

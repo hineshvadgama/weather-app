@@ -1,68 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import DailyInfo from '../../Components/DailyInfo/DailyInfo.js';
 import HourlyInfo from '../../Components/HourlyInfo/HourlyInfo.js';
 import NoHourlyDataMessage from '../../Components/NoHourlyDataMessage/NoHouryDataMessage.js';
 import './HourlyForecast.css';
 import { getApiKey, getDateFromObject } from '../../Utils/utils.js';
+import { CoordinateContext } from '../../Components/CoordinateContext.js';
+import CurrentTemp from '../../Components/CurrentTemp/CurrentTemp.js';
 
-function HourlyForecast(props) {
+function HourlyForecast() {
 
-    let [hourlyData, setHourlyData] = useState({renderedData: 'Loading...', isDataSet: false});
-    let [isDataFetched, setIsDataFetched] = useState(false);
+    let [hourlyData, setHourlyData] = useState({renderedData: 'Loading...'});
+    const coordinates = useContext(CoordinateContext);
     const dayOfWeekInUrl = useLocation().pathname.substr(1);
     const todaysDateObject = new Date();
 
     useEffect(() => {
 
-        if (isDataFetched === false) {
+        if (coordinates.latitude !== 'notSet') {
 
-            if (typeof(props.coordinates.latitude) === 'number') {
+            const apiKey = getApiKey();
 
-                const apiKey = getApiKey();
+            fetch (`https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${apiKey}&units=metric`)
+            .then (res => res.json())
+            .then (data => {
 
-                fetch (`https://api.openweathermap.org/data/2.5/forecast?lat=${props.coordinates.latitude}&lon=${props.coordinates.longitude}&appid=${apiKey}&units=metric`)
-                .then (res => res.json())
-                .then (data => setHourlyData({renderedData: data.list, isDataSet: false}));
+                let newHourlyData = [];
+                let usersSelectedDay;
+            
+                if (dayOfWeekInUrl === 'Today') {
+            
+                    usersSelectedDay = getDateFromObject(todaysDateObject);
 
-                setIsDataFetched(true);
-            }
-
+                } else {
+            
+                    const numberOfDaysBetweenTodayAndSelectedDay = getSelectedNumberOfDaysAheadOfToday(todaysDateObject.getDay(), dayOfWeekInUrl);
+                    let selectedDateObject = new Date();
+                    selectedDateObject.setDate(todaysDateObject.getDate() + numberOfDaysBetweenTodayAndSelectedDay);
+                    usersSelectedDay = getDateFromObject(selectedDateObject);
+                }
+            
+                for (let i = 0; i < data.list.length; i++) {
+            
+                    const date = data.list[i].dt_txt.slice(-19, -9);
+            
+                    if (usersSelectedDay === date) {
+                        newHourlyData.push(data.list[i]);
+                    }
+            
+                }
+            
+                setHourlyData({renderedData: newHourlyData});
+            
+            });
         }
         // eslint-disable-next-line
-    }, [props]);
+    }, [coordinates]);
 
-    function setHourlyDataToSelectedDate() {
-
-        let newHourlyData = [];
-        let usersSelectedDay;
-
-        if (dayOfWeekInUrl === 'Today') {
-
-            usersSelectedDay = getDateFromObject(todaysDateObject);
-        } else {
-
-            const numberOfDaysBetweenTodayAndSelectedDay = getSelectedNumberOfDaysAheadOfToday(todaysDateObject.getDay(), dayOfWeekInUrl);
-            let selectedDateObject = new Date();
-            selectedDateObject.setDate(todaysDateObject.getDate() + numberOfDaysBetweenTodayAndSelectedDay);
-            usersSelectedDay = getDateFromObject(selectedDateObject);
-        }
-
-        for (let i = 0; i < hourlyData.renderedData.length; i++) {
-
-            const date = hourlyData.renderedData[i].dt_txt.slice(-19, -9);
-
-            if (usersSelectedDay === date) {
-                newHourlyData.push(hourlyData.renderedData[i]);
-            }
-
-        }
-
-        if (hourlyData.isDataSet === false) {
-            setHourlyData({renderedData: newHourlyData, isDataSet: true});
-        }
-
-    }
 
     function getSelectedNumberOfDaysAheadOfToday(todaysDay, selectedDayOfWeek) {
         
@@ -76,47 +70,6 @@ function HourlyForecast(props) {
         }
 
         return twoWeekCounter;
-    }
-
-    function getHourlyComponents() {
-
-        let arrayOfHourlyInfoComponents = [];
-
-        if (typeof(hourlyData.renderedData[0]) === 'undefined') {
-
-            arrayOfHourlyInfoComponents = <NoHourlyDataMessage />
-
-        } else if (typeof(hourlyData.renderedData[0].dt_txt) === 'string') {
-
-            setHourlyDataToSelectedDate();
-
-            if (hourlyData.isDataSet === true) {
-
-                for (let i = 0; i < hourlyData.renderedData.length; i++) {
-    
-                    arrayOfHourlyInfoComponents.push(
-                        <HourlyInfo
-                            key={i}
-                            time={extractTimeFromDateTime(hourlyData.renderedData[i].dt_txt)}
-                            temp={`${Math.round(hourlyData.renderedData[i].main.temp)}°C`}
-                            status={hourlyData.renderedData[i].weather[0].main}
-                        />
-                    );
-    
-                }
-    
-            }
-
-        }
-
-        return arrayOfHourlyInfoComponents;
-    }
-
-    function extractTimeFromDateTime(dateTime) {
-
-        let time = dateTime.slice(10, 16);
-
-        return time;
     }
 
     function getUserDay() {
@@ -136,22 +89,53 @@ function HourlyForecast(props) {
         return dayInQuestion;
     }
 
+    function getHourlyComponents() {
+
+        let arrayOfHourlyInfoComponents = [];
+        
+        if (typeof(hourlyData.renderedData[0]) === 'undefined') {
+    
+            arrayOfHourlyInfoComponents = <NoHourlyDataMessage />
+    
+        } else if (typeof(hourlyData.renderedData[0].dt_txt) === 'string') {
+    
+            for (let i = 0; i < hourlyData.renderedData.length; i++) {
+    
+                arrayOfHourlyInfoComponents.push(
+                    <HourlyInfo
+                        key={i}
+                        time={extractTimeFromDateTime(hourlyData.renderedData[i].dt_txt)}
+                        temp={`${Math.round(hourlyData.renderedData[i].main.temp)}°C`}
+                        status={hourlyData.renderedData[i].weather[0].main}
+                    />
+                );
+    
+            }
+    
+        }
+    
+        return arrayOfHourlyInfoComponents;
+    }
+
+    function extractTimeFromDateTime(dateTime) {
+
+        let time = dateTime.slice(10, 16);
+    
+        return time;
+    }
+    
+
     return (
         <>
-            <DailyInfo
-                day={dayOfWeekInUrl}
-                latitude={props.coordinates.latitude}
-                longitude={props.coordinates.longitude}
-                userDay={getUserDay()}
-            />
+        {console.log(hourlyData)}
+            <CurrentTemp />
+            <DailyInfo day={dayOfWeekInUrl} userDay={getUserDay()} />
 
             <div className={`hi-container ${typeof(hourlyData.renderedData[0]) === 'undefined' ? 'justify-center' : ''}`}>
-
                 {getHourlyComponents()}
-
             </div>
         </>
-    );
+    )
 
 }
 

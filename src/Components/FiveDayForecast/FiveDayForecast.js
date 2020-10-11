@@ -72,7 +72,8 @@ function FiveDayForecast() {
 
                 arrayOfDays.push(
                     <DailyForecastStep
-                        day={convertTimestampToDay(weatherData.daily[i].dt)}
+                        key={i}
+                        day={i === 0 ? 'Today' : convertTimestampToDay(weatherData.daily[i].dt)}
                         status={weatherData.daily[i].weather[0].main}
                         high={`${getFormattedTemp(weatherData.daily[i].temp.max)}`}
                         low={`${getFormattedTemp(weatherData.daily[i].temp.min)}`}
