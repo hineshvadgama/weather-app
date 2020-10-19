@@ -118,10 +118,37 @@ function HourlyForecast() {
     }
 
     function extractTimeFromDateTime(dateTime) {
-
         let time = dateTime.slice(10, 16);
-    
         return time;
+    }
+
+    // CLICK AND DRAG FOR HORIZONTAL SCROLLING
+
+    const hiContainer = document.querySelector('.hi-container');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    if (hiContainer !== null) {
+
+        hiContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - hiContainer.offsetLeft;
+            scrollLeft = hiContainer.scrollLeft;
+        });
+
+        hiContainer.addEventListener('mouseup', (e) => {
+            isDown = false;
+        });
+
+        hiContainer.addEventListener('mousemove', (e) => {
+            
+            if (!isDown) return; // Stop the function is the mouse is not clicked
+            e.preventDefault();
+            const x = e.pageX - hiContainer.offsetLeft;
+            const walk = x - startX;
+            hiContainer.scrollLeft = scrollLeft - walk;
+        });
     }
     
 

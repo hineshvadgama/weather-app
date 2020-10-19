@@ -6,6 +6,14 @@
     margin-top: 5vw;
 }
 
+.hi-container:hover {
+    cursor: grab;
+}
+
+.hi-container:active {
+    cursor: grabbing;
+}
+
 .hi-container::-webkit-scrollbar {
     display: none;
 }
